@@ -14,16 +14,16 @@ module Player {
 
         constructor(n:string) {
             this._name = n;
-            this._playPile = new Deck.Pile();
-            this._wonPile = new Deck.Pile();
+            this._playPile = new Deck.cardPile(0);
+            this._wonPile = new Deck.cardPile(0);
         }
 
         public playCard() {
-            if(this._playPile.pileSize() === 0){
+            if(this._playPile.Size() === 0){
                 this.useWonPile()
             }
-            if(this._playPile.pileSize()> 0){
-                return this._playPile.getTopCard();
+            if(this._playPile.Size()> 0){
+                return this._playPile.deal();
             }
             return null;
           }
@@ -33,7 +33,7 @@ module Player {
         }
 
         public getNumCards() {
-            return this._playPile.pileSize()+this._wonPile.pileSize();
+            return this._playPile.Size()+this._wonPile.Size();
         }
 
         public useWonPile() {
