@@ -15,23 +15,23 @@ module Card {
         private _suit:number;
 
         constructor(r:number, s:number ) {
-            if (r<0 || r>13){
+            if (r<0 || r>13){  // rank must be between 1 (ace) and 13 (king)
                 r=0;
             }
-            if (s<0 || s>4){
-                s=0;
+            if (s<0 || s>4){  // suit must be between 1 and 4 ( 1 = clubs, 2 = diamonds, 3 = hearts, 4 = spades)
+                s=0;          // The order of suit is not necessary for War but may matter in other card games
             }
             this._rank = r;
             this._suit = s;
         }
 
-        public getRank():number {
-            if (this._rank === 1) return 14;
+        public getRank():number { // return the ranking of the card from Ace to King (1 - 13)
+            if (this._rank === 1) return 14; // in War the Ace is this highest ranking card so we return 14
             return this._rank;
         }
 
 
-        public toString() {
+        public toString() {  // display the card in readable text format
 
             var rankText:string;
             var suits = ["Invalid Suit","Clubs","Diamonds","Hearts","Spades"];

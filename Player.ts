@@ -7,9 +7,9 @@
 module Player {
     export class Player {
 
-        private _name:string;
-        private _playPile = null;
-        private _wonPile = null;
+        private _name:string;  // name of the player
+        private _playPile = null;  // pile of cards the player deals from
+        private _wonPile = null;  // pile of cards the player has won so far
 
 
         constructor(n:string) {
@@ -19,36 +19,29 @@ module Player {
         }
 
         public playCard() {
-            if(this._playPile.Size() === 0){
-                this.useWonPile()
+            if(this._playPile.Size() === 0){ // if player runs out of cards, move the cards from the won pile over
+                this._playPile.addCards(this._wonPile);
             }
-            if(this._playPile.Size()> 0){
+            if(this._playPile.Size()> 0){  // play from the play pile
                 return this._playPile.deal();
             }
             return null;
           }
 
         public getName() {
-            return this._name;
+            return this._name; // obvious
         }
 
-        public getNumCards() {
+        public getNumCards() { // return the total number of cards the player has by adding the play and won piles together
             return this._playPile.Size()+this._wonPile.Size();
         }
 
-        public useWonPile() {
-            this._playPile.addCards(this._wonPile);
-
-        }
-
-        public collectCard(theDeck) {
+        public collectCard(theDeck) {  // a played collects cards into the won pile
             this._wonPile.addCard(theDeck)
         }
 
-        public collectCards(thePile) {
+        public collectCards(thePile) { // a played collects cards into the won pile
             this._wonPile.addCards(thePile)
         }
     }
-
-
 }
